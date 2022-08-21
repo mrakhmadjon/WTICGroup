@@ -12,8 +12,8 @@ using WTICGroup.Data;
 namespace WTICGroup.Migrations
 {
     [DbContext(typeof(WTICGroupContext))]
-    [Migration("20220821132431_ModelChangesMigrations")]
-    partial class ModelChangesMigrations
+    [Migration("20220821141555_ModelChanged")]
+    partial class ModelChanged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,7 +228,7 @@ namespace WTICGroup.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("CreatedDate")
+                    b.Property<DateTimeOffset?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<decimal?>("Price")
@@ -245,10 +245,11 @@ namespace WTICGroup.Migrations
                     b.Property<decimal?>("TotalPrice")
                         .HasColumnType("numeric");
 
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("integer");
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<DateTime?>("UpdatedDate")
+                    b.Property<DateTimeOffset?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");

@@ -12,8 +12,8 @@ using WTICGroup.Data;
 namespace WTICGroup.Migrations
 {
     [DbContext(typeof(WTICGroupContext))]
-    [Migration("20220821134958_ModelChangesMigrationsChanges")]
-    partial class ModelChangesMigrationsChanges
+    [Migration("20220821141816_ModelChangeda")]
+    partial class ModelChangeda
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -245,8 +245,8 @@ namespace WTICGroup.Migrations
                     b.Property<decimal?>("TotalPrice")
                         .HasColumnType("numeric");
 
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("integer");
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");

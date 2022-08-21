@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace WTICGroup.Migrations
 {
-    public partial class ModelChangesMigrations : Migration
+    public partial class ModelChanged : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,9 +59,9 @@ namespace WTICGroup.Migrations
                     Quantiy = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: true),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: true),
-                    UpdatedBy = table.Column<int>(type: "integer", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    UpdatedBy = table.Column<string>(type: "text", nullable: false),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    UpdatedDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {

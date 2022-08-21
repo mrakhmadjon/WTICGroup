@@ -243,8 +243,8 @@ namespace WTICGroup.Migrations
                     b.Property<decimal?>("TotalPrice")
                         .HasColumnType("numeric");
 
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("integer");
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");

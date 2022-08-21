@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -116,9 +117,12 @@ namespace WTICGroup.Controllers
             {
                 try
                 {
+                    var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                    var username = _context.Users.FirstOrDefault(p => p.Id == userId).UserName;
                     decimal vatAmount = decimal.Parse(_configuration.GetSection("VATAmount").Value);
                     product.TotalPrice = (product.Price * decimal.Parse(product.Quantiy)) * (1 + vatAmount);
                     product.UpdatedDate = DateTime.UtcNow;
+                    product.UpdatedBy = username;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
