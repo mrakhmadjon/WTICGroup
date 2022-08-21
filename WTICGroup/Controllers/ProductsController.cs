@@ -35,7 +35,6 @@ namespace WTICGroup.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Details(int? id)
         {
-            var vatAmount = _configuration.GetRequiredSection("VATAmount").Value;
             if (id == null || _context.Product == null)
             {
                 return NotFound();
@@ -62,7 +61,7 @@ namespace WTICGroup.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Create([Bind("Id,Title,Quantiy,Price,VAT")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Title,Quantiy,Price")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +95,7 @@ namespace WTICGroup.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Quantiy,Price,VAT")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Quantiy,Price")] Product product)
         {
             if (id != product.Id)
             {

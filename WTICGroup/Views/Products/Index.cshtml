@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VAT)
+                @Html.DisplayNameFor(model => model.TotalPrice)
             </th>
             <th></th>
         </tr>
@@ -43,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VAT)
+                @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
                     @if (User.IsInRole("admin"))
