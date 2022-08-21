@@ -2,18 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WTICGroup.Data;
 
 #nullable disable
 
-namespace WTICGroup.Data.Migrations
+namespace WTICGroup.Migrations
 {
     [DbContext(typeof(WTICGroupContext))]
-    partial class WTICGroupContextModelSnapshot : ModelSnapshot
+    [Migration("20220821134958_ModelChangesMigrationsChanges")]
+    partial class ModelChangesMigrationsChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,7 +228,10 @@ namespace WTICGroup.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Price")
+                    b.Property<DateTimeOffset?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("Price")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Quantiy")
@@ -237,8 +242,14 @@ namespace WTICGroup.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<double>("VAT")
-                        .HasColumnType("double precision");
+                    b.Property<decimal?>("TotalPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

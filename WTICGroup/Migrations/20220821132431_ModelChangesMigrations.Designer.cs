@@ -9,11 +9,11 @@ using WTICGroup.Data;
 
 #nullable disable
 
-namespace WTICGroup.Data.Migrations
+namespace WTICGroup.Migrations
 {
     [DbContext(typeof(WTICGroupContext))]
-    [Migration("20220821121754_Initial")]
-    partial class Initial
+    [Migration("20220821132431_ModelChangesMigrations")]
+    partial class ModelChangesMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,7 +228,10 @@ namespace WTICGroup.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Price")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("Price")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Quantiy")
@@ -239,8 +242,14 @@ namespace WTICGroup.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<double>("VAT")
-                        .HasColumnType("double precision");
+                    b.Property<decimal?>("TotalPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,17 +17,23 @@ namespace WTICGroup.Controllers
     {
         private readonly WTICGroupContext _context;
         private readonly IConfiguration _configuration;
+        private readonly UserManager<IdentityUser> _userM;
 
-        public ProductsController(WTICGroupContext context,IConfiguration configuration)
+
+        public ProductsController(WTICGroupContext context,IConfiguration configuration,
+            UserManager<IdentityUser> userManager)
         {
             _context = context;
-            _configuration = configuration; 
+            _configuration = configuration;
+            _userM = userManager;
+
+
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-              return _context.Product != null ? 
+            return _context.Product != null ? 
                           View(await _context.Product.ToListAsync()) :
                           Problem("Entity set 'WTICGroupContext.Product'  is null.");
         }
@@ -63,8 +70,11 @@ namespace WTICGroup.Controllers
         // [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("Id,Title,Quantiy,Price")] Product product)
         {
+            decimal vatAmount = decimal.Parse(_configuration.GetSection("VATAmount").Value);
+
             if (ModelState.IsValid)
             {
+                product.TotalPrice = (product.Price * decimal.Parse(product.Quantiy)) * (1 + vatAmount);
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -106,6 +116,9 @@ namespace WTICGroup.Controllers
             {
                 try
                 {
+                    decimal vatAmount = decimal.Parse(_configuration.GetSection("VATAmount").Value);
+                    product.TotalPrice = (product.Price * decimal.Parse(product.Quantiy)) * (1 + vatAmount);
+                    product.UpdatedDate = DateTime.UtcNow;
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }

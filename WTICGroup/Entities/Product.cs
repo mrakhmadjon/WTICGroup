@@ -8,12 +8,12 @@
 
         public string Quantiy { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
-        public decimal TotalPrice { get; set; }
-
-        public DateTime? CreatedDate { get; set; } = DateTime.Now;
-        public DateTime? UpdatedDate { get; set; } = DateTime.Now;
+        public decimal? TotalPrice { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTimeOffset? CreatedDate { get; set; } = DateTime.UtcNow;
+        public DateTimeOffset? UpdatedDate { get; set; }
 
         public bool? Edited => CreatedDate != UpdatedDate;
     }

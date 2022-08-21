@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace WTICGroup.Data.Migrations
+namespace WTICGroup.Migrations
 {
-    public partial class Initial : Migration
+    public partial class ModelChangesMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,8 +57,11 @@ namespace WTICGroup.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: false),
                     Quantiy = table.Column<string>(type: "text", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    VAT = table.Column<double>(type: "double precision", nullable: false)
+                    Price = table.Column<decimal>(type: "numeric", nullable: true),
+                    TotalPrice = table.Column<decimal>(type: "numeric", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "integer", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
