@@ -1,0 +1,43 @@
+﻿@model WTICGroup.Entities.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantiy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantiy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VAT)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VAT)
+        </dd>
+    </dl>
+</div>
+<div class="form-group">
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="mt-4 btn btn-secondary">Edit</a>
+    <a asp-action="Index" class="mt-4 mx-4 btn btn-success">Back to List</a>
+
+</div>

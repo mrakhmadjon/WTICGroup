@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WTICGroup.Entities.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (this.User.IsInRole("admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantiy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VAT)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantiy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VAT)
+            </td>
+            <td>
+                  
+                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                        <a class="btn-secondary btn" asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                        <a class="btn-danger btn" asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
+                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
