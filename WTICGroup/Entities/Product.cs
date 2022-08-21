@@ -10,6 +10,11 @@
 
         public decimal Price { get; set; }
 
-        public double VAT { get; set; }
+        public decimal TotalPrice { get; set; }
+
+        public DateTime? CreatedDate { get; set; } = DateTime.Now;
+        public DateTime? UpdatedDate { get; set; } = DateTime.Now;
+
+        public bool? Edited => CreatedDate != UpdatedDate;
     }
 }

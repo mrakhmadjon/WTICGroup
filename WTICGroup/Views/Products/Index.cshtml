@@ -46,11 +46,12 @@
                 @Html.DisplayFor(modelItem => item.VAT)
             </td>
             <td>
-                  
+                    @if (User.IsInRole("admin"))
+                    {
                         <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
                         <a class="btn-secondary btn" asp-action="Details" asp-route-id="@item.Id">Details</a> 
                         <a class="btn-danger btn" asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
-                    
+                    }
             </td>
         </tr>
 }

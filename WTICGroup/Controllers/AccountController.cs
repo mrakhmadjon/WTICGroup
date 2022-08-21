@@ -49,9 +49,8 @@ public class AccountController : Controller
     {
         var user = await _userM.FindByNameAsync(model.Username);
         if(user is null)
-        {
-            return BadRequest();
-        }
+        {return BadRequest();}
+        
         var result = await _signInM.PasswordSignInAsync(user, model.Password, false, false);
 
         return LocalRedirect($"{model.ReturnUrl ?? "/"}");
